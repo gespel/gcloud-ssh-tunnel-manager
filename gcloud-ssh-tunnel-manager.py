@@ -24,14 +24,10 @@ def new_tunnel_dialog(name, zone, local_port, remote_port):
     label = tk.Label(root, text=f"{name} in {zone} -> {local_port}:localhost:{remote_port}", bg="gray40", fg="white")
     label.grid(row=2 + len(labels), column=0, padx=10, pady=5)
     labels.append(label)
+    gcm = GCloudSSHTunnelManager(name, zone)
+    gcm.start_tunnel(local_port, remote_port)
 
 if __name__ == '__main__':
-    gcm = GCloudSSHTunnelManager("jenkins-master", "europe-west10-a")
-    #gcm.start_tunnel("jenkins-master", "europe-west10-a", 8080, 8080)
-    #gcm.start_tunnel("jenkins-master", "europe-west10-a", 8081, 8081)
-    #gcm.start_tunnel("gitlab", "europe-west10-a", 8082, 80)
-    #gcm.start_tunnel("gitlab", "europe-west10-a", 443, 443)
-
     root = tk.Tk()
     name_var = tk.StringVar()
     zone_var = tk.StringVar()
