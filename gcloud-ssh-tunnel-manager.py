@@ -24,10 +24,6 @@ def new_tunnel_dialog(name, zone, local_port, remote_port):
     label = tk.Label(root, text=f"{name} in {zone} -> {local_port}:localhost:{remote_port}", bg="gray40", fg="white")
     label.grid(row=2 + len(labels), column=0, padx=10, pady=5)
     labels.append(label)
-    print(name)
-    print(zone)
-    print(local_port)
-    print(remote_port)
 
 if __name__ == '__main__':
     gcm = GCloudSSHTunnelManager("jenkins-master", "europe-west10-a")
