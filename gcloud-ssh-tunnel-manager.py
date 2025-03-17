@@ -2,6 +2,7 @@ import subprocess
 import yaml
 import pprint
 import os
+import sys
 import tkinter as tk
 from functools import partial
 from tkinter import ttk
@@ -25,7 +26,19 @@ class GCloudSSHTunnelManager:
         t.start()
 
 if __name__ == '__main__':
-    with open("backends.yaml", "r") as f:
+    args = sys.argv[1:]
+    filename = ""
+
+    if len(args) == 0:
+        filename = "backends.yaml"
+        print("Defaulting to backends.yaml")
+    elif len(args) == 1:
+        filename = args[0]
+    else:
+        print("Please enter only one config yaml!")
+        exit(-1)
+
+    with open(filename, "r") as f:
         config = yaml.safe_load(f)
         for server in config["backends"]:
             name = server["name"]
