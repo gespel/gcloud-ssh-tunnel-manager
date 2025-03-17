@@ -1,6 +1,7 @@
 import subprocess
 import yaml
 import pprint
+import os
 import tkinter as tk
 from functools import partial
 from tkinter import ttk
@@ -10,8 +11,10 @@ from threading import Thread
 def tunnel(name, zone, local_port, remote_port):
     exec_string = f"gcloud compute ssh {name} --zone {zone} -- -N -L {local_port}:localhost:{remote_port}"
     #print(exec_string)
-    #print(subprocess.run(["gcloud", "compute", "ssh", name, "--zone", zone, "--", "-N", "-L", f"{local_port}:localhost:{remote_port}"], stdout=subprocess.PIPE, shell=True).stdout.decode('utf-8'))
-    print(subprocess.run([exec_string], stdout=subprocess.PIPE, shell=True).stdout.decode('utf-8'))
+    if os.name == "nt":
+        print(subprocess.run(["gcloud", "compute", "ssh", name, "--zone", zone, "--", "-N", "-L", f"{local_port}:localhost:{remote_port}"], stdout=subprocess.PIPE, shell=True).stdout.decode('utf-8'))
+    else:
+        print(subprocess.run([exec_string], stdout=subprocess.PIPE, shell=True).stdout.decode('utf-8'))
 class GCloudSSHTunnelManager:
     def __init__(self, name, zone):
         self.zone = zone
