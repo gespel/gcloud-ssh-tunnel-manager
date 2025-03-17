@@ -1,0 +1,12 @@
+backends:
+  - name: jenkins-master
+    zone: europe-west10-a
+    ports:
+    - local_port: 8080
+      remote_port: 8080
+
+  - name: gitlab
+    zone: europe-west10-a
+    ports:
+    - local_port: 8082
+      remote_port: 80
