@@ -34,6 +34,7 @@ if __name__ == '__main__':
         print("Defaulting to backends.yaml")
     elif len(args) == 1:
         filename = args[0]
+        print(f"Using {filename} as backend config")
     else:
         print("Please enter only one config yaml!")
         exit(-1)
